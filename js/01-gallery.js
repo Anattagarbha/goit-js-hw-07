@@ -3,7 +3,20 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
-// declare vars
+// init vars
 
 const imgGallery = document.querySelector(".gallery");
 const galleryMarkup = createMarkup(galleryItems);
+
+// declare iterating function
+
+function createMarkup(items) {
+  return items
+    .map(
+      (
+        item
+      ) => `div class="gallery__item"><a class="gallery__link" href="${item.original}"
+    <img class="gallery__image" src="${item.preview}" alt="${item.description}" /></a></div>`
+    )
+    .join("");
+}
