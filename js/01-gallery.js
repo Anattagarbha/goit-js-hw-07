@@ -24,3 +24,31 @@ function createMarkup(items) {
 
 const galleryMarkup = createMarkup(galleryItems);
 imgGallery.innerHTML = galleryMarkup;
+
+// add listener
+
+imgGallery.addEventListener("click", handleClick);
+
+// use basicLightbox functionality
+
+let instance;
+
+function handleClick(event) {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  instance = basicLightbox.create(
+    `<div><img src=${event.taget.dataset.source} width="1024" height="768"</div>`,
+    {
+      className: "modal",
+      onShow: () => {
+        window.addEventListener("keydown", onEscDown);
+      },
+      onClose: () => {
+        window.removeEventListener("keydown", onEscDown);
+      },
+    }
+  );
+  instance.show();
+}
